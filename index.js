@@ -9,16 +9,24 @@ const convert = (obj) => Object.entries(obj);
 
 //3
 const toCamelCase = (str) => {
-	let newStr = str.split('-');
+	let newStr = '';
+	
+	for (let i = 0; i < str.length; i++) {
 
-	for (let i = 1; i < newStr.length; i++) {
-		newStr[0] = newStr[0][0].toUpperCase() + newStr[0].slice(1);
+		if (str[i] === '-' || str[i] === '_') {
+        	newStr += str[i + 1].toUpperCase();
+			i += 1;
+			continue;
+		}
+		
+		newStr += str[i];
 	}
 
-	return newStr.join('');
+	return newStr;
 }
 
-toCamelCase("the-stealth-warrior"); // theStealthWarrior
+toCamelCase("the-stealth-warrior") // "theStealthWarrior"
+toCamelCase("The_Stealth_Warrior") // "TheStealthWarrior"
 
 //4
 const reverse = (str) => str.split(' ').map(word => word.split('').reverse().join('')).join(' ');
